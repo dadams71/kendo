@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="styles/kendo.common.min.css" rel="stylesheet" />
+
+    <script src="js/libraries/jquery.min.js"></script>	
+    <script src="js/libraries/angular.min.js"></script>
+    <script src="js/kendo/kendo.all.min.js"></script>
+</head>
+<body>
+    <div id="example">
+    <div id="grid"></div>
+<script src="http://localhost/data/products.js"></script>
+    <script>
+        $(document).ready(function() {
+			
+			 var tableContent = kendo.template("<li id='ProductName ProductID' class='testdrop'>#: ProductName #</li>");
+
+			var inlineData = { ProductName: "ProductName", ProductID: "ProductID" };
+			$("#inline").html(tableContent(inlineData));
+			 
+            $("#grid").kendoGrid({
+                dataSource: {
+					data: products,
+                    schema: {
+                        model: {
+                            fields: {
+                                        ProductName: { type: "string" },
+                                        UnitPrice: { type: "number" },
+                                        UnitsInStock: { type: "number" },
+                                        Discontinued: { type: "boolean" },
+										QuantityPerUnit: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 30
+                },
+                height: 540,
+                sortable: true,
+                reorderable: true,
+                groupable: true,
+                resizable: true,
+                filterable: false,
+                columnMenu: true,
+                pageable: true,
+                columns: [ 
+				
+				                    {
+                        //field: "ProductName",
+                        title: "Product Name",
+                        locked: true,
+                        width: 300,
+                        template: tableContent
+                    },	{
+                        field: "UnitPrice",
+                        title: "Unit Price",
+						format: "{0:c}",
+                        width: 350
+                    }, {
+                        field: "UnitsInStock",
+                        title: "Units In Stock",
+                        width: 330
+                    }, {
+                        field: "Discontinued",
+                        width: 230
+                    }, {
+						field: "QuantityPerUnit",
+						title: "Quantity Per Unit",
+						width: 300
+						}
+                ]
+            });
+		
+		function draggableOnDragStart(e) {
+                    $("li.testdrop").addClass("hollow");
+
+                    $("#droptarget").text("(Drop here)");
+                }
+
+                function droptargetOnDragEnter(e) {
+                    $("#droptarget").text("Now drop...");
+                }
+
+                function droptargetOnDragLeave(e) {
+                    $("#droptarget").text("(Drop here)");
+                }
+
+                function droptargetOnDrop(e) {
+                    $("#droptarget").text("You did great!");
+                    $("li.testdrop").removeClass("hollow");
+                }
+
+                function draggableOnDragEnd(e) {
+                    var draggable = $("li.testdrop");
+
+                    if (!draggable.data("kendoDraggable").dropped) {
+                        // drag ended outside of any droptarget
+                        $("#droptarget").text("Try again!");
+                    }
+
+                    draggable.removeClass("hollow");
+                }
+
+                $(document).ready(function() {
+                    $("li.testdrop").kendoDraggable({
+                        hint: function() {
+                            return $("#draggable").clone();
+                        },
+                        dragstart: draggableOnDragStart,
+                        dragend: draggableOnDragEnd
+                    });
+
+                    $("#droptarget").kendoDropTarget({
+                        dragenter: droptargetOnDragEnter,
+                        dragleave: droptargetOnDragLeave,
+                        drop: droptargetOnDrop
+                    });
+
+                    var draggable = $("li.testdrop").data("kendoDraggable");
+
+                    $("#cursorOffset").click(function(e) {
+                        if (this.checked) {
+                            draggable.options.cursorOffset = { top: 10, left: 10 };
+                        } else {
+                            draggable.options.cursorOffset = null;
+                        }
+                    });
+
+                    $("#axis").change(function(e) {
+                        draggable.options.axis = $(this).val();
+                    });
+                });
+				});
+        </script>
+       <script id="test" type="text/x-kendo-tmpl">
+        <li>
+            #: ProductName#
+        </li>
+        </script>
+
+
+</div>
+
+
+</body>
+</html>
