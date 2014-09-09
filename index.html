@@ -11,13 +11,13 @@
 <body>
     <div id="example">
     <div id="grid"></div>
-<script src="http://localhost/data/products.js"></script>
+<script src="data/products.js"></script>
     <script>
         $(document).ready(function() {
 			
 			 var tableContent = kendo.template("<li id='ProductName ProductID' class='testdrop'>#: ProductName #</li>");
 
-			var inlineData = { ProductName: "ProductName", ProductID: "ProductID" };
+			var inlineData = { ProductName: "#: ProductName #", ProductID: "ProductID" };
 			$("#inline").html(tableContent(inlineData));
 			 
             $("#grid").kendoGrid({
