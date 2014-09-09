@@ -1,26 +1,113 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 #droptarget {
-height: 198px;
-font-size: 18px;
-border-radius: 37px;
-text-align: center;
-line-height: 198px;
-margin: 0 0 30px 215px;
-cursor: default;
-vertical-align: middle;
+  height: 198px;
+  font-size: 18px;
+  border-radius: 37px;
+  text-align: center;
+  line-height: 198px;
+  margin: 0 0 30px 215px;
+  cursor: default;
+  vertical-align: middle;
 }
-
-.onthemove, .hollow{
-background-color: red;
-color: green;	
-	}
-	
-	
-	.draggable-item { 
-	opacity: 0.6;
-    background-color: #0cf;
-	}
-	
-	
-	.dropping-area { border: 1px solid blue; }
+.onthemove,
+.hollow {
+  background-color: red;
+  color: green;
+}
+.draggable-item {
+  opacity: 0.6;
+  background-color: #0cf;
+}
+.dropping-area {
+  border: 1px solid blue;
+}
+[tc-schedule-container] {
+  height: 100%;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+[tc-schedule-row] {
+  height: 30px;
+}
+#scheduleListContainer {
+  height: 800px;
+  max-width: 976px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.schedule {
+  width: 7440px;
+  float: left;
+  margin-left: 112px;
+  height: 81px;
+  border-bottom: 0;
+  list-style: none;
+}
+.schedule li {
+  float: left;
+  position: relative;
+  white-space: nowrap;
+  line-height: 1.3em;
+  height: 81px;
+  display: block;
+  overflow: hidden;
+  width: 75px;
+}
+.schedule li:hover {
+  overflow: visible;
+}
+.schedule li a,
+.schedule li span {
+  display: block;
+  text-decoration: none;
+}
+.schedule li div.outer {
+  position: absolute;
+  height: 100%;
+  z-index: 0;
+}
+.schedule li div.inner {
+  border: 1px solid #404040;
+  border-right: none;
+  border-top: none;
+  background-color: #262525;
+  height: 80px;
+}
+.schedule li div.inner a {
+  height: 68px;
+  padding: 6px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.schedule li:hover a,
+.schedule li.highlight a,
+.schedule a:active,
+.schedule a:focus {
+  padding-left: 4px;
+  padding-right: 5px;
+  border: 2px solid #f54997;
+  border-right-width: 1px;
+  border-top: none;
+  border-bottom: none;
+  background-color: #dedddd;
+}
+.title {
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+}
+.time {
+  color: #bdbdbd;
+  white-space: nowrap;
+  width: 80px;
+}
+/*# sourceMappingURL=Core.css.map */

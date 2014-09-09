@@ -4,51 +4,47 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    
+
     <link href="styles/kendo.common.min.css" rel="stylesheet" />
     <link href="css/core.css" rel="stylesheet" />
     <script src="js/libraries/jquery.min.js"></script>
     <script src="js/libraries/angular.min.js"></script>
     <script src="js/kendo/kendo.all.min.js"></script>
-  
     <script src="data/people.js"></script>
 </head>
 <body>
-    <!--<div id="new-grid"></div>
-    <script>
-        var template = kendo.template("<div id='box'>#: firstName #</div>");
-        var data = { firstName: "ProductName" }; //Data with HTML tags
-        var result = template(data); //Pass the data to the compiled template
-        $("#new-grid").html(result); // display the following string result ("<b>Todd</b>")
-    </script>-->
+    <div id="scheduleListContainer">
+        <div tc-schedule-container id="scheduleList"></div>
 
-    <div id="example">
-        <table id="people" class="metrotable">
-            <thead>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Title</th>
-            <th>Age</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
         <script id="template" type="text/x-kendo-template">
-            <tr>
-                <td>#= Id #</td>
-                <td>#= FirstName #</td>
-                <td>#= LastName #</td>
-                <td>#= Title #</td>
-                <td>#= Age #</td>
-            </tr>
+            <ol class="schedule">
+                <li style="width: 75px;">#= FirstName # </li>
+                <li style="width: 75px;">#= LastName #</li>
+                <li style ="width: 75px;">
+                    <div class="outer">
+                        <div class="inner">
+                            <a href="\#">
+                                <div class="episode-container">
+                                    <span class="title">#= FirstName #</span>
+                                    <span class="time unselectable">#= LastName #</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li style="width: 75px;">
+                    <div class="outer">
+                        <div class="inner">
+                            <a href="\#">
+                                <div class="episode-container">
+                                    <span class="title">#= cities #</span>
+                                    <span class="time unselectable">#=titles #</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ol>
         </script>
 
         <script>
@@ -60,14 +56,25 @@
                     data: createRandomData(20),
                     change: function () { // subscribe to the CHANGE event of the data source
                         // update the max attribute of the "page" input
-                       // $("#page").attr("max", this.totalPages());
+                         $("#page").attr("max", this.totalPages());
 
-                        $("#people tbody").html(kendo.render(template, this.view()));
+                        $("#scheduleList").html(kendo.render(template, this.view()));
                     }
                 });
 
                 // read the data
                 dataSource.read();
+
+                $('.schedule li')
+                 .mouseenter(
+                    function () {
+                        $(this).addClass('hover'),
+                        $('.outer', this).css("z-index", "105").animate({ width: '174px' }, 300);
+                    })
+                .mouseleave(
+                    function () {
+                        $(this).removeClass('hover'), $('.outer',this).css("z-index", "0").animate({ width: '75px' }, 300);;
+                    });
             });
         </script>
 
