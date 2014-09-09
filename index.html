@@ -11,13 +11,21 @@
 <body>
     <div id="example">
     <div id="grid"></div>
+<<<<<<< HEAD
 <script src="data/products.js"></script>
+=======
+<script src="http://localhost/data/products.js"></script>
+>>>>>>> parent of 8ac95a2... General update of this project
     <script>
         $(document).ready(function() {
 			
 			 var tableContent = kendo.template("<li id='ProductName ProductID' class='testdrop'>#: ProductName #</li>");
 
+<<<<<<< HEAD
 			var inlineData = { ProductName: "#: ProductName #", ProductID: "ProductID" };
+=======
+			var inlineData = { ProductName: "ProductName", ProductID: "ProductID" };
+>>>>>>> parent of 8ac95a2... General update of this project
 			$("#inline").html(tableContent(inlineData));
 			 
             $("#grid").kendoGrid({
