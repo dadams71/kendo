@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+    <link href="styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="css/core.css" rel="stylesheet" />
+    <script src="js/libraries/jquery.min.js"></script>
+    <script src="js/libraries/angular.min.js"></script>
+    <script src="js/kendo/kendo.all.min.js"></script>
+  
+    <script src="data/people.js"></script>
+</head>
+<body>
+    <!--<div id="new-grid"></div>
+    <script>
+        var template = kendo.template("<div id='box'>#: firstName #</div>");
+        var data = { firstName: "ProductName" }; //Data with HTML tags
+        var result = template(data); //Pass the data to the compiled template
+        $("#new-grid").html(result); // display the following string result ("<b>Todd</b>")
+    </script>-->
+
+    <div id="example">
+        <table id="people" class="metrotable">
+            <thead>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Title</th>
+            <th>Age</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <script id="template" type="text/x-kendo-template">
+            <tr>
+                <td>#= Id #</td>
+                <td>#= FirstName #</td>
+                <td>#= LastName #</td>
+                <td>#= Title #</td>
+                <td>#= Age #</td>
+            </tr>
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                // create a template using the above definition
+                var template = kendo.template($("#template").html());
+
+                var dataSource = new kendo.data.DataSource({
+                    data: createRandomData(20),
+                    change: function () { // subscribe to the CHANGE event of the data source
+                        // update the max attribute of the "page" input
+                       // $("#page").attr("max", this.totalPages());
+
+                        $("#people tbody").html(kendo.render(template, this.view()));
+                    }
+                });
+
+                // read the data
+                dataSource.read();
+            });
+        </script>
+
+    </div>
+
+
+
+
+
+</body>
+</html>
+
