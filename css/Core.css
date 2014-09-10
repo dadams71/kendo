@@ -1,5 +1,116 @@
 ﻿@charset "utf-8";
 /* CSS Document */
+/* Open Sans fonts */
+/* Pre-Defined colors
+    ***************************************************************/
+/* disable on white */
+@font-face {
+  font-family: 'open_sanslight';
+  src: url('../fonts/opensans-light/OpenSans-Light-webfont.eot');
+  src: url('../fonts/opensans-light/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-light/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/opensans-light/OpenSans-Light-webfont.ttf') format('truetype'), url('../fonts/opensans-light/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('../fonts/opensans-regular/OpenSans-Regular-webfont.eot');
+  src: url('../fonts/opensans-regular/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-regular/OpenSans-Regular-webfont.woff') format('woff'), url('../fonts/opensans-regular/OpenSans-Regular-webfont.ttf') format('truetype'), url('../fonts/opensans-regular/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_sanssemibold';
+  src: url('../fonts/opensans-semibold/OpenSans-Semibold-webfont.eot');
+  src: url('../fonts/opensans-semibold/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-semibold/OpenSans-Semibold-webfont.woff') format('woff'), url('../fonts/opensans-semibold/OpenSans-Semibold-webfont.ttf') format('truetype'), url('../fonts/opensans-semibold/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  font-family: open_sanslight;
+}
+h1 {
+  font-size: 1.5em;
+  /*  1.3em; /* Temp */
+  line-height: 1;
+  padding-top: 0.53em;
+  margin-bottom: 0.5em;
+  font-family: open_sanssemibold;
+  color: #263e75;
+}
+h1.page-title {
+  text-indent: 1.4em;
+  float: left;
+}
+h1.page-title.cust-icon-small span {
+  opacity: 1;
+}
+h2 {
+  font-size: 1.3em;
+  padding-top: 0.25em;
+  margin-bottom: 0.5em;
+  font-family: open_sanssemibold;
+}
+h3 {
+  font-size: 1.2em;
+  /*1.5 */
+  line-height: 1;
+  padding-top: 0.35em;
+  margin-bottom: 0.65em;
+  font-family: open_sanssemibold;
+}
+h4 {
+  font-size: 1.1em;
+  line-height: 1.25;
+  padding-top: 0.45em;
+  margin-bottom: 0.8em;
+  font-family: open_sanssemibold;
+}
+h4.page-title {
+  padding-top: 0px;
+  font-weight: 600;
+}
+h5 {
+  font-size: 1em;
+  line-height: 1;
+  padding-top: 0.35em;
+  margin-bottom: 0.65em;
+  font-family: open_sanssemibold;
+}
+h6 {
+  font-size: 0.9em;
+  line-height: 1;
+  padding-top: 0.6em;
+  margin-bottom: 0.65em;
+  font-family: open_sanssemibold;
+}
+body {
+  font-family: Calibri, Arial, Helvetica, "Segoe UI", Verdana, Sans-Serif;
+  min-height: 100%;
+  font-size: 87.5%;
+  line-height: 1.4em;
+  color: #3b3b3b;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
 #droptarget {
   height: 198px;
   font-size: 18px;
@@ -42,22 +153,22 @@
   padding: 0 16px;
 }
 .schedule {
-  width: 7440px;
-  float: left;
-  margin-left: 112px;
-  height: 81px;
   border-bottom: 0;
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .schedule li {
   float: left;
   position: relative;
   white-space: nowrap;
   line-height: 1.3em;
-  height: 81px;
   display: block;
   overflow: hidden;
   width: 75px;
+}
+.schedule li.two {
+  margin-right: 2px;
 }
 .schedule li:hover {
   overflow: visible;
@@ -77,14 +188,16 @@
   border-right: none;
   border-top: none;
   background-color: #262525;
-  height: 80px;
 }
 .schedule li div.inner a {
-  height: 68px;
   padding: 6px;
   overflow: hidden;
   position: relative;
   display: block;
+}
+.schedule li div.inner.green {
+  border: 1px solid #6ccb6b;
+  background-color: #7bde7a;
 }
 .schedule li:hover a,
 .schedule li.highlight a,
@@ -109,5 +222,61 @@
   color: #bdbdbd;
   white-space: nowrap;
   width: 80px;
+}
+.k-grid-content table {
+  table-layout: fixed;
+}
+.schedule-table {
+  border-bottom: 0;
+  list-style: none;
+}
+.schedule-table td {
+  position: relative;
+  white-space: nowrap;
+  line-height: 1.3em;
+  overflow: hidden;
+  padding: 5px;
+}
+.schedule-table td:hover {
+  overflow: visible;
+}
+.schedule-table td a,
+.schedule-table td span {
+  display: block;
+  text-decoration: none;
+}
+.schedule-table td div.outer {
+  position: relative;
+  z-index: 0;
+  float: left;
+  height: 35px;
+}
+.schedule-table td div.hover {
+  position: absolute;
+  top: 5px;
+}
+.schedule-table td div.inner {
+  border: 1px solid #404040;
+  border-right: none;
+  border-top: none;
+  background-color: #262525;
+}
+.schedule-table td div.inner a {
+  padding: 6px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.schedule-table td div.inner a .title {
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+}
+.schedule-table td div.inner a .time {
+  color: #bdbdbd;
+  white-space: nowrap;
+  width: auto;
 }
 /*# sourceMappingURL=Core.css.map */

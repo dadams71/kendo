@@ -14,13 +14,64 @@
 </head>
 <body>
     <div id="scheduleListContainer">
-        <div tc-schedule-container id="scheduleList"></div>
+        <!--<div tc-schedule-container id="scheduleList"></div>-->
+        <div class="k-grid" style="width: 600px; z-index: 0;">
+            <div class="k-grid-header" style="padding-right: 17px;">
+                <div class="k-grid-header-wrap">
+                    <table role="grid">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead role="rowgroup">
+                            <tr role="row">
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Sunday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Monday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Tuesday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Wednesday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Thursday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Friday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Saturday</a>
+                                </th>
+                                <th role="columnheader" class="k-header">
+                                    <a class="k-link" href="#">Sunday</a>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="k-grid-content" style="height: 443px;">
+                <table id="scheduleTable">
+                    <tbody>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <script id="template" type="text/x-kendo-template">
-            <ol class="schedule">
+            <ol class="schedule ">
                 <li style="width: 75px;">#= FirstName # </li>
                 <li style="width: 75px;">#= LastName #</li>
-                <li style ="width: 75px;">
+                <li style="width: 75px;">
                     <div class="outer">
                         <div class="inner">
                             <a href="\#">
@@ -47,34 +98,118 @@
             </ol>
         </script>
 
+        <script id="table" type="text/x-kendo-template">
+            <tr class="schedule-table">
+                <td>#= FirstName # </td>
+                <td>
+                    <ol class="schedule clearfix">
+                        <li>
+                            <div class="outer">
+                                <div class="inner green">
+                                    <a href="\#">
+                                        <div class="episode-container">
+                                            <span class="title">David</span>
+                                            <span class="time unselectable">Adams</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </td>
+                <td>Me   </td>
+                <td>
+                    <ol class="schedule clearfix">
+                        <li class="two">
+                            <div class="outer">
+                                <div class="inner">
+                                    <a href="\#">
+                                        <div class="episode-container">
+                                            <span class="title">David</span>
+                                            <span class="time unselectable">Adams</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="two">
+                            <div class="outer">
+                                <div class="inner">
+                                    <a href="\#">
+                                        <div class="episode-container">
+                                            <span class="title">Jimmy</span>
+                                            <span class="time unselectable">Markham</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </td>
+                <td>Thursday</td>
+                <td>Friday</td>
+                <td>Saturday</td>
+                <td>Sunday</td>
+
+            </tr>
+        </script>
+
         <script>
             $(document).ready(function () {
                 // create a template using the above definition
                 var template = kendo.template($("#template").html());
+                var tableT = kendo.template($("#table").html());
 
                 var dataSource = new kendo.data.DataSource({
                     data: createRandomData(20),
                     change: function () { // subscribe to the CHANGE event of the data source
                         // update the max attribute of the "page" input
-                         $("#page").attr("max", this.totalPages());
+                        $("#page").attr("max", this.totalPages());
 
                         $("#scheduleList").html(kendo.render(template, this.view()));
+                        $("#scheduleTable tbody").html(kendo.render(tableT, this.view()));
                     }
                 });
 
                 // read the data
                 dataSource.read();
 
-                $('.schedule li')
+                function findLiNumber() {
+
+                };
+
+                var cellWidth = $('.schedule-table td', this).width() - 4;
+                //var dutyCount = $(this).find('li');
+                //alert(dutyCount.length)
+
+                $('.schedule li, .schedule li.two')
                  .mouseenter(
                     function () {
                         $(this).addClass('hover'),
-                        $('.outer', this).css("z-index", "105").animate({ width: '174px' }, 300);
+                        $('.outer', this).css("z-index", "105", "overflow", "visible").animate({ width: '100px' }, 300);
                     })
                 .mouseleave(
                     function () {
-                        $(this).removeClass('hover'), $('.outer',this).css("z-index", "0").animate({ width: '75px' }, 300);;
+                        $(this).removeClass('hover'),
+                        $('.outer', this).css("z-index", "0").animate({ width: cellWidth }, 300);
                     });
+                $('.schedule li').css("width", cellWidth),
+                $('.schedule li.two').css("width", cellWidth / 2);
+
+
+                //    $('.sschedule-table .outer')
+                //     .mouseenter(
+                //        function () {
+                //            //$(this).addClass('hover'),
+                //            $(this).addClass('hover').css("z-index", "105").animate({ width: '174px' }, 300);
+                //        })
+                //    .mouseleave(
+                //        function () {
+                //            //$(this).removeClass('hover'),
+                //            $(this).removeClass('hover').css("z-index", "0").animate({ width: '60px' }, 300);;
+                //        });
+
+
             });
         </script>
 
@@ -86,4 +221,3 @@
 
 </body>
 </html>
-
